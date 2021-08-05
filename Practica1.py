@@ -1,16 +1,28 @@
 from tkinter import filedialog,Tk
+#variables globales utilizadas
 opcion=0
 curso=""
 alumnos=[]
+alumnos2=[]
 notas=[]
+notas2=[]
+reportes=[]
+cantidad_alum=0
 
+#FUNCION PARA GENERAR REPORTE DE LOS DATOS GUARDADOS AL LEER EL ARCHIVO
+def reportelectura():
+    global curso,alumnos,notas
+    print("Curso: ",curso)
+    print("Estudiantes incritos: ",cantidad_alum)
+    for i in range(cantidad_alum):
+        print("El estudiante: ",alumnos[i]," tiene una nota de: ",notas[i])
 
 
 def cargararchivo():
-    global curso,alumnos,notas
+    global curso,alumnos,alumnos2,notas,notas2,cantidad_alum
 
-    print('cargararchivo')
     Tk().withdraw()
+    #GENERANDO VENTANA PARA ELEGIR ARCHIVO
     archivo=filedialog.askopenfile(
         title="Selecciona un archivo en formato LFP",
         initialdir="./",
@@ -23,7 +35,8 @@ def cargararchivo():
     fin_datos=contenido.find("}")
     datos=(contenido[inicio_datos+1:fin_datos]).strip()
     cantidad_alum=datos.count(",")+1
-    print(cantidad_alum)
+
+    #CAPTURA DE LOS DATOS {DATOS}
     for i in range(cantidad_alum):
         pos_coma=datos.find(",")
         alumno=(datos[0:pos_coma]).strip()
@@ -34,9 +47,43 @@ def cargararchivo():
         datos=datos[pos_coma+1:len(datos)]
         alumnos.append(alumno)
         notas.append(nota)
-        print("Nombre del alumno: ",alumno," su nota es: ",nota)
-    print(alumnos)
-    print(notas)
+
+    #COPIA DE LOS ARREGLOS ORIGINALES
+    alumnos2=alumnos.copy()
+    notas2=notas.copy()
+    
+    #LECTURA DE LOS PARAMETROS OTORGADOS
+    solicitado=contenido[fin_datos+1:len(contenido)]
+    cantidad_rep=solicitado.count(",")+1
+    if cantidad_rep==0:
+        reportes.append(solicitado.strip())
+    if cantidad_rep>0:
+        for i in range(cantidad_rep):
+            coma=solicitado.find(",")
+            reporte=(solicitado[0:coma]).strip()
+            
+            if i<cantidad_rep-1:
+                solicitado=solicitado[coma+1:len(solicitado)]
+                reportes.append(reporte)
+            else:
+                reportes.append(solicitado.strip())
+
+    #GENERAR REPORTE DE LA LECTURA
+    reportelectura()
+
+    #PRUEBAS DE ORDENAMIENTO
+
+    for i in range(1,len(notas2)):
+        for j in range(0,len(notas2)-i):
+            if(notas2[j+1]>notas2[j]):
+                aux1=notas2[j]
+                aux2=alumnos2[j]
+                notas2[j]=notas2[j+1]
+                alumnos2[j]=alumnos2[j+1]
+                notas2[j+1]=aux1
+                alumnos2[j+1]=aux2
+    #print(alumnos2)
+    #print(notas2)
 
 def menu():
     global opcion
@@ -52,8 +99,6 @@ def menu():
             if opcion==1:
                 cargararchivo()
             elif opcion==2:
-                for i in range(3):
-                    print(i)
                 print("Mostrar reporte")
             elif opcion==3:
                 print("Exportar Reporte")
