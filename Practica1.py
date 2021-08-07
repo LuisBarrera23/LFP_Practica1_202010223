@@ -12,6 +12,104 @@ promedio=0
 aprobados=0
 reprobados=0
 
+def cargaprueba():
+    global curso,alumnos,alumnos2,notas,notas2,cantidad_alum,reportes
+    alumnos.clear(),alumnos2.clear(),notas.clear(),notas2.clear(),reportes.clear()
+
+    #Tk().withdraw()
+    #GENERANDO VENTANA PARA ELEGIR ARCHIVO
+    archivo=filedialog.askopenfile(
+        title="Selecciona un archivo en formato LFP",
+        initialdir="./",
+        filetypes=(("archivos LFP","*.lfp"),("Todos los archivos","*.*"))
+    )
+    contenido=archivo.read()
+    archivo.close()
+    if contenido is not None:
+        for c,caracter in enumerate(contenido):
+            if contenido[c]=="=":
+                curso=contenido[0:c]
+                print(curso)
+        datos=""
+        inicio=False
+        fin=0
+        iterador=0
+        for c in contenido:
+            if c=="}":
+                fin=iterador
+            if c=="\n":
+                continue
+            if c=="\t":
+                continue
+            if c =="{":
+                inicio=True
+                continue
+            if inicio==True:
+                datos+=c
+                iterador+=1
+        datos2=""
+        solicitado=""
+                
+        for c,caracter in enumerate(datos):
+            if c<fin:
+                datos2+=caracter
+            if c>fin:
+                solicitado+=caracter
+        print(datos2)
+        print(solicitado)
+
+
+        estudiante=""
+        inicio=False
+        for i, caracter in enumerate(datos2):
+            if (caracter=="\"") and estudiante=="":
+                inicio=True
+                continue
+            if caracter=="\"":
+                alumnos.append(estudiante)
+                inicio=False
+                estudiante=""
+                continue
+            if inicio==True:
+                estudiante+=caracter
+
+        inicio=False
+        nota_c=""
+        nota=0
+        for c in datos2:
+            if c==";":
+                inicio=True
+                continue
+            if c==">":
+                nota=float(nota_c)
+                nota_c=""
+                inicio=False
+                notas.append(nota)
+            if (inicio==True) and (c is not " "):
+                nota_c+=c
+        
+        reporte=""
+        for c in solicitado:
+            if c==",":
+                reportes.append(reporte)
+                reporte=""
+                continue
+            if c is not " ":
+                reporte+=c
+        
+        reportes.append(reporte)
+            
+
+
+        cantidad_alum=len(alumnos)
+        alumnos2=alumnos.copy()
+        notas2=notas.copy()
+        print(reportes)
+
+                
+                
+
+
 #FUNCION PARA GENERAR REPORTE DE LOS DATOS GUARDADOS AL LEER EL ARCHIVO
 def reportelectura():
     global curso,alumnos,notas
@@ -144,6 +242,7 @@ def cargararchivo():
         filetypes=(("archivos LFP","*.lfp"),("Todos los archivos","*.*"))
     )
     contenido=archivo.read()
+    archivo.close()
     separador=contenido.find("=")
     curso=(contenido[0:separador]).strip()
     inicio_datos=contenido.find("{")
@@ -200,7 +299,8 @@ def menu():
         try:
             opcion=int(input('Ingrese el numero de opción deseada: \n'))
             if opcion==1:
-                cargararchivo()
+                #cargararchivo()
+                cargaprueba()
             elif opcion==2:
                 print("Curso: ",curso)
                 print("Estudiantes inscritos: ",cantidad_alum)
