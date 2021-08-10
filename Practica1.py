@@ -1,4 +1,5 @@
-from tkinter import filedialog,Tk
+import tkinter as tk
+from tkinter import filedialog
 #variables globales utilizadas
 opcion=0
 curso=""
@@ -18,13 +19,17 @@ def cargaprueba():
 
     #Tk().withdraw()
     #GENERANDO VENTANA PARA ELEGIR ARCHIVO
-    archivo=filedialog.askopenfile(
+    root=tk.Tk()
+    archivo=filedialog.askopenfilename(
         title="Selecciona un archivo en formato LFP",
         initialdir="./",
-        filetypes=(("archivos LFP","*.lfp"),("Todos los archivos","*.*"))
+        filetypes=(("archivos LFP","*.lfp"),("Todos los archivos","*.*")),
     )
-    contenido=archivo.read()
-    archivo.close()
+    print(archivo)
+    lectura=open(archivo,"r",encoding='UTF-8')
+    contenido=lectura.read()
+    lectura.close()
+    
     if contenido is not None:
         for c,caracter in enumerate(contenido):
             if contenido[c]=="=":
@@ -85,7 +90,7 @@ def cargaprueba():
                 nota_c=""
                 inicio=False
                 notas.append(nota)
-            if (inicio==True) and (c is not " "):
+            if (inicio==True) and (c!=" "):
                 nota_c+=c
         
         reporte=""
@@ -94,7 +99,7 @@ def cargaprueba():
                 reportes.append(reporte)
                 reporte=""
                 continue
-            if c is not " ":
+            if c!=" ":
                 reporte+=c
         
         reportes.append(reporte)
@@ -229,61 +234,6 @@ def mostrarReprobados():
     print("-----\tEstudiantes reprobados en el curso: ",reprobados,"\t-----")
     print("\n")
     
-
-def cargararchivo():
-    global curso,alumnos,alumnos2,notas,notas2,cantidad_alum,reportes
-    alumnos.clear(),alumnos2.clear(),notas.clear(),notas2.clear(),reportes.clear()
-
-    #Tk().withdraw()
-    #GENERANDO VENTANA PARA ELEGIR ARCHIVO
-    archivo=filedialog.askopenfile(
-        title="Selecciona un archivo en formato LFP",
-        initialdir="./",
-        filetypes=(("archivos LFP","*.lfp"),("Todos los archivos","*.*"))
-    )
-    contenido=archivo.read()
-    archivo.close()
-    separador=contenido.find("=")
-    curso=(contenido[0:separador]).strip()
-    inicio_datos=contenido.find("{")
-    fin_datos=contenido.find("}")
-    datos=(contenido[inicio_datos+1:fin_datos]).strip()
-    cantidad_alum=datos.count(",")+1
-
-    #CAPTURA DE LOS DATOS {DATOS}
-    for i in range(cantidad_alum):
-        pos_coma=datos.find(",")
-        alumno=(datos[0:pos_coma]).strip()
-        alumno=alumno.strip(' <>')
-        pos_puntocoma=alumno.find(";")
-        nota=int((alumno[pos_puntocoma+1:len(alumno)]).strip())
-        alumno=(alumno[0:pos_puntocoma]).strip(' "')
-        datos=datos[pos_coma+1:len(datos)]
-        alumnos.append(alumno)
-        notas.append(nota)
-
-    #COPIA DE LOS ARREGLOS ORIGINALES
-    alumnos2=alumnos.copy()
-    notas2=notas.copy()
-    
-    #LECTURA DE LOS PARAMETROS OTORGADOS
-    solicitado=contenido[fin_datos+1:len(contenido)]
-    cantidad_rep=solicitado.count(",")+1
-    if cantidad_rep==0:
-        reportes.append(solicitado.strip())
-    if cantidad_rep>0:
-        for i in range(cantidad_rep):
-            coma=solicitado.find(",")
-            reporte=(solicitado[0:coma]).strip()
-            
-            if i<cantidad_rep-1:
-                solicitado=solicitado[coma+1:len(solicitado)]
-                reportes.append(reporte)
-            else:
-                reportes.append(solicitado.strip())
-
-    #GENERAR REPORTE DE LA LECTURA
-    reportelectura()
 
 
 
