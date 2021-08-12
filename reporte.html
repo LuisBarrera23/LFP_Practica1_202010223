@@ -1,0 +1,75 @@
+
+    <!doctype html>
+    <html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>Reporte Practica 1</title>
+    </head>
+    <style>
+    .titulo{
+        text-align: center;
+        background-color: aqua;
+        padding: 8px;
+    }
+    .cuerpo{
+        background-color: white;
+    }
+    .contenido{
+        color: white;
+    }
+    .inscritos{
+        color:white;
+        background-color: teal;
+        padding: 8px;
+    }
+    .tabla{
+        width:80%; 
+        text-align: center; 
+        margin-right: auto; 
+        margin-left: auto;
+        padding: 15px;
+    }
+    h1,h2{
+        text-align:center;
+        padding:8px;
+    }
+    button{
+        margin-right: auto; 
+        margin-left: auto;
+        text-align: center;
+        padding: 5px;
+        margin-bottom: 15px;
+        width: 200px;
+    }
+    </style>
+    <body class="cuerpo">
+    <div class="titulo">
+    <h1>Lenguajes Formales y de Programación </h1></div><div class="inscritos"><h2>Estudiantes incritos en el curso: 6</h2></div><div class="inscritos"><h2>Listado Original</h2><div class="tabla"><table class="table table-dark table-hover"><thead><tr>
+    <th scope="col">No.</th>
+    <th scope="col">NOMBRE</th>
+    <th scope="col">NOTA</th>
+    </tr></thead><tbody><tr><th scope="row">1</th><td>Rodolfo Morales</td><td style="color:#033CF6;">90.0</td></tr><tr><th scope="row">2</th><td>José Morales</td><td style="color:#033CF6;">93.0</td></tr><tr><th scope="row">3</th><td>Sofia Guerrero</td><td style="color:#033CF6;">89.0</td></tr><tr><th scope="row">4</th><td>Santiago Durán</td><td style="color:red;">60.0</td></tr><tr><th scope="row">5</th><td>Luis Francisco</td><td style="color:#033CF6;">61.0</td></tr><tr><th scope="row">6</th><td>Fernando Franco</td><td style="color:#033CF6;">75.0</td></tr></tbody></table></div></div><h2>Listado de Estudiantes según nota de forma ascendente</h2><div class="tabla"><table class="table table-dark table-hover"><thead><tr>
+            <th scope="col">No.</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">NOTA</th>
+            </tr></thead><tbody><tr><th scope="row">1</th><td>Santiago Durán</td><td style="color:red;">60.0</td></tr><tr><th scope="row">2</th><td>Luis Francisco</td><td style="color:#033CF6;">61.0</td></tr><tr><th scope="row">3</th><td>Fernando Franco</td><td style="color:#033CF6;">75.0</td></tr><tr><th scope="row">4</th><td>Sofia Guerrero</td><td style="color:#033CF6;">89.0</td></tr><tr><th scope="row">5</th><td>Rodolfo Morales</td><td style="color:#033CF6;">90.0</td></tr><tr><th scope="row">6</th><td>José Morales</td><td style="color:#033CF6;">93.0</td></tr></tbody></table></div><h2>Listado de Estudiantes según nota de forma Descendente</h2><div class="tabla"><table class="table table-dark table-hover"><thead><tr>
+            <th scope="col">No.</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">NOTA</th>
+            </tr></thead><tbody><tr><th scope="row">1</th><td>José Morales</td><td style="color:#033CF6;">93.0</td></tr><tr><th scope="row">2</th><td>Rodolfo Morales</td><td style="color:#033CF6;">90.0</td></tr><tr><th scope="row">3</th><td>Sofia Guerrero</td><td style="color:#033CF6;">89.0</td></tr><tr><th scope="row">4</th><td>Fernando Franco</td><td style="color:#033CF6;">75.0</td></tr><tr><th scope="row">5</th><td>Luis Francisco</td><td style="color:#033CF6;">61.0</td></tr><tr><th scope="row">6</th><td>Santiago Durán</td><td style="color:red;">60.0</td></tr></tbody></table></div><h2>El promedio de los estudiantes del curso es: </h2><center><button type="button" class="btn btn-outline-primary">78.0</button></center><h2>La nota mínima reportada en el curso: </h2><div class="tabla"><table class="table table-dark table-hover"><thead><tr>
+            <th scope="col">No.</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">NOTA</th>
+            </tr></thead><tbody><tr><th scope="row">1</th><td>Santiago Durán</td><td style="color:red;">60.0</td></tr></tbody></table></div><h2>La nota máxima reportada en el curso: </h2><div class="tabla"><table class="table table-dark table-hover"><thead><tr>
+            <th scope="col">No.</th>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">NOTA</th>
+            </tr></thead><tbody><tr><th scope="row">1</th><td>José Morales</td><td style="color:#033CF6;">93.0</td></tr></tbody></table></div><h2>El número de estudiantes aprobados en el curso: </h2><center><button type="button" class="btn btn-outline-success">5</button></center><h2>El número de estudiantes aprobados en el curso: </h2><center><button type="button" class="btn btn-outline-success">5</button></center><h2>El número de estudiantes reprobados en el curso: </h2><center><button type="button" class="btn btn-outline-danger">1</button></center><h2>El número de estudiantes reprobados en el curso: </h2><center><button type="button" class="btn btn-outline-danger">1</button></center>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    </body>
+    </html>
