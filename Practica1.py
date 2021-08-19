@@ -126,7 +126,6 @@ def reportelectura():
 
 #Funcion para la generación de HTML 
 def generarReporteHTML():
-    print("hola")
     global curso,cantidad_alum,alumnos2,notas2,reportes,promedio,alumnos,notas
     f=open("Reporte.html","w",encoding='UTF-8')
     inicio="""
